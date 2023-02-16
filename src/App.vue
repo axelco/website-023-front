@@ -1,20 +1,8 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <UiSection>
-    <UiContainer size="md" >
-      <router-view/>
-    </UiContainer>  
-  </UiSection>
-
-  
+  <router-view/>  
 </template>
 
 <script setup>
-  import UiSection from './components/ui/UiSection.vue'
-  import UiContainer from './components/ui/UiContainer.vue';
 
 </script>
 

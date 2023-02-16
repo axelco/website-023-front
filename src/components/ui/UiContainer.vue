@@ -5,7 +5,7 @@
 
 </template>
 
-<script setup>
+<script setup >
 
 import { defineProps } from 'vue';
 
