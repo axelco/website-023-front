@@ -1,8 +1,10 @@
 <template>
     <UiSection class="text-center">
         <UiContainer size="sm" >
+            
             <img id="avatar" src="./../assets/img/photo-alexandre-rozec-purple-300x300.png" />
-            <h1 class="display-5">Bienvenue sur mon CV web</h1>
+            <h1 class="h5 my-2">{{getFullName}} </h1>
+            <h2 class="display-6">Bienvenue sur mon CV</h2>
             <p class="fs-2">Quel poste recherchez-vous ?</p>
         </UiContainer>  
         <UiContainer size="md" class="mt-4">
@@ -18,7 +20,7 @@
                         class="h-100">
 
                         <template #header>
-                            <h2 class="h3 mb-0">{{ item.name }}</h2>
+                            <h3 class="h3 mb-0">{{ item.name }}</h3>
                         </template>
 
                         <template #default>
@@ -49,9 +51,10 @@
 </template>
 
 <script setup >
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 import ResumeService from '@/services/resume.service';
 import LocalStorageService from '@/services/localStorage.service'
@@ -59,15 +62,21 @@ import UiSection from '@/components/ui/UiSection.vue';
 import UiContainer from '@/components/ui/UiContainer.vue';
 import UiCard from '@/components/ui/UiCard.vue'
 
-const state = reactive({ jobsPossible: [] })
+const state = reactive({ 
+    jobsPossible: [] 
+})
 const router = useRouter()
+const store = useStore()
+
+const getFullName = computed(()=>{
+    return `${store.getters['infos/getFirstName']} ${store.getters['infos/getLastName']}`
+})
 
 const fetchJobsPossible = () => {
     ResumeService.getJobTypes()
     .then(
         (res) => {
             state.jobsPossible = res.data
-            console.log(state.jobsPossible)
         }
     ).catch(error => console.error(error))
 }

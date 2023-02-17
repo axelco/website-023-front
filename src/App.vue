@@ -1,8 +1,64 @@
 <template>
-  <router-view/>  
+
+  <div v-if="!state.infosLoaded" class="py-3 py-lg-5">
+    <ui-spinner />
+  </div>  
+  <div v-else>
+    
+    <UiContainer v-if="hasError" size="md" class="py-3 py-lg-5">
+      <div class="alert alert-warning">
+        <p class="display-6" >
+        Une erreur est survenue ! Détail de l'erreur :</p>
+        <p class="">{{state.infosApiError}}</p>
+      </div>
+
+    </UiContainer>
+    <div v-else>
+      <router-view/>
+    </div>
+  </div>
+  
 </template>
 
-<script setup>
+<script setup >
+  import { reactive, computed } from 'vue'
+  import { useStore } from 'vuex';
+  import { onMounted } from 'vue';
+  import infosService from './services/infos.service';
+
+  import UiContainer from './components/ui/UiContainer.vue';
+  import UiSpinner from './components/ui/UiSpinner.vue';
+
+  const store = useStore()
+
+  const state = reactive({ 
+    infosLoaded: false,
+    infosApiError : null, 
+  })
+
+  onMounted(()=>{
+    getPersonalInfos();
+  })
+
+  const hasError = computed(()=>{
+    return state.infosApiError !== null
+  })
+
+  const getPersonalInfos = () =>  {
+    state.infosLoaded = false
+    infosService.getPersonalInfos()
+    .then(
+      (res)=>{
+        store.dispatch('infos/storeInfos', res.data)
+        state.infosLoaded = true
+      }
+    ).catch(
+      (error)=>{
+        state.infosLoaded = true
+        state.infosApiError = error.toString()
+      }
+    )
+  }
 
 </script>
 
