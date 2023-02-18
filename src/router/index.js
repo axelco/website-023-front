@@ -13,8 +13,8 @@ const routes = [
     component: () => import('../views/ResumeView.vue')
   },
   {
-    path: '/chose-job',
-    name: 'choseJob',
+    path: '/choose-job',
+    name: 'chooseJobContext',
     component: () => import('../views/ChooseResume.vue')
   }  
 ]

@@ -1,8 +1,7 @@
 import { api } from "./api.service";
-import localStorageService from "./localStorage.service";
+import store from "@/store";
 
 class ResumeService{
-
     // Récupère la liste des jobs possibles dans l'API
     // Afin d'afficher cette liste dans la page de choix du job de CV
     getJobTypes(){
@@ -10,22 +9,13 @@ class ResumeService{
         return api.get(`/resume/job-types`)
     }
 
-    // On vérifie que le localStorage jobChosen est bien rempli
-    // Et que la valeur correspond à l'attendu en fonction des possibilités
-    // Côté backend
-    checkJobChosen(){
-        const jobChosen = localStorageService.getJobChosen()
-        if(jobChosen === null){
-            return false
-        }
-        // TODO : vérifier si la valeur de jobChosen est valide
-        
-        return true
+    getIntroByContext(){
+        return api.get(`/resume/intro/${store.getters['resume/getContext']}`)
+  
     }
 
-    getIntroByContext(){
-        const jobContext = localStorageService.getJobChosen()
-        return api.get(`/resume/intro/${jobContext}`)
+    getHardSkillsByContext(){
+        return api.get(`/resume/hard-skills/${store.getters['resume/getContext']}`)    
     }
     
 }

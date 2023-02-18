@@ -32,7 +32,7 @@
                                 <button 
                                     @click="handleJobChoosing" 
                                     :value="item._id"
-                                    class="btn btn-primary">
+                                    class="btn btn-lg btn-primary">
                                     Voir le CV {{ item.name }}
                                 </button>
                             </div>                        
@@ -56,7 +56,6 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 import ResumeService from '@/services/resume.service';
-import LocalStorageService from '@/services/localStorage.service'
 import UiSection from '@/components/ui/UiSection.vue';
 import UiContainer from '@/components/ui/UiContainer.vue';
 import UiCard from '@/components/ui/UiCard.vue'
@@ -84,7 +83,7 @@ const fetchJobsPossible = () => {
 // On va alimenter le localStorage pour permettre d'accéder au CV web
 // On stocker l'Id du job pour les futures requêtes
 const handleJobChoosing = (e) => {
-    LocalStorageService.setJobChosen(e.target.value)
+    store.dispatch('resume/setContext', e.target.value)
     router.push({name: 'resume'})
 }
 
