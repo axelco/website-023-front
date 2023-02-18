@@ -31,7 +31,7 @@
                             <div class="d-grid gap-2">
                                 <button 
                                     @click="handleJobChoosing" 
-                                    :value="item.technicalName"
+                                    :value="item._id"
                                     class="btn btn-primary">
                                     Voir le CV {{ item.name }}
                                 </button>
@@ -51,8 +51,7 @@
 </template>
 
 <script setup >
-import { reactive, computed } from 'vue'
-import { onMounted } from 'vue';
+import { reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
@@ -83,6 +82,7 @@ const fetchJobsPossible = () => {
 
 // Au clic du choix Utilisateur
 // On va alimenter le localStorage pour permettre d'accéder au CV web
+// On stocker l'Id du job pour les futures requêtes
 const handleJobChoosing = (e) => {
     LocalStorageService.setJobChosen(e.target.value)
     router.push({name: 'resume'})

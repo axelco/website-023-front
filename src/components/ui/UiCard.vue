@@ -45,6 +45,7 @@ defineProps({
 
 .card{
     background-color: $black;
+    color: $gray-400;
 
     .card-header, .card-footer{
         border-color: $dark;

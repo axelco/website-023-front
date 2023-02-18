@@ -1,5 +1,5 @@
 <template>
-    <div :class="`container ${size}`">
+    <div :class="`container ${props.size}`">
         <slot></slot>
     </div>
 
@@ -9,7 +9,7 @@
 
 import { defineProps } from 'vue';
 
-defineProps({
+const props = defineProps({
   size: {
     type: String,
     default : '',

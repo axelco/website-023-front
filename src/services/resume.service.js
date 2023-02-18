@@ -22,6 +22,11 @@ class ResumeService{
         
         return true
     }
+
+    getIntroByContext(){
+        const jobContext = localStorageService.getJobChosen()
+        return api.get(`/resume/intro/${jobContext}`)
+    }
     
 }
 
