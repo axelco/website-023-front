@@ -1,23 +1,24 @@
 <template>
     <div 
-        class="row">
+        class="row gx-3">
         <div 
-            class="col-12 mb-2 col-lg-4 "
+            class="col-12 mb-3 col-md-6 col-lg-4 skill-item"
             v-for="item in state.hardSkills" :key="item._id"
             >
             <UiCard 
                 :show-footer="false"
                 :show-header="false"
-                class="h-100">
+                class="h-100 skill-card">
                 <p v-if="state.hardSkillsLoaded" class="fs-1" >
-                    {{ item.emoji ? item.emoji : `⚙️` }}
+                    <!-- {{ item.emoji }} -->
+                    <i :class="`icon bi bi-${item.bsIcon ? item.bsIcon : `gear` }`"></i>
                 </p>
                 <p v-else class="fs-1 placeholder-glow">
                     <span class="placeholder col-2"></span>  
                 </p>
 
                 <p v-if="state.hardSkillsLoaded"
-                class="fs-4 fw-bold mb-0"
+                class="fs-4  mb-0"
                 >{{item.name}}</p>    
                 <p v-else class="fs-4 placeholder-glow">
                     <span class="placeholder col-8"></span>  
@@ -27,6 +28,7 @@
 
             </UiCard>
         </div>
+ 
     </div>
 </template>
 
@@ -70,3 +72,43 @@ const fetchHardSkills = () => {
 }
 
 </script>
+
+<style lang="scss">
+@import 'src/assets/styles/theming';
+.skill-item{
+    .icon {
+        color: #F9B068;
+    }
+
+    &:nth-child(odd){
+        .icon {
+            color: #F578CA;
+        }
+    }
+
+    // &:nth-child(3n+2){
+    //     .icon {
+    //         color: #F86C6B;
+    //     }
+    // }
+
+    // &:nth-child(2n+1){
+    //     .icon {
+    //         color: #28BEBD;
+    //     }
+    // }    
+
+    // &:nth-child(3n+3){
+    //     .icon {
+    //         color: #A55EEA;
+    //     }
+    // }  
+    
+    // &:nth-child(2n+4){
+    //     .icon {
+    //         color: #F9B068;
+    //     }
+    // }        
+}
+
+</style>
