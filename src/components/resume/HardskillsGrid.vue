@@ -13,13 +13,15 @@
                     <!-- {{ item.emoji }} -->
                     <i :class="`icon bi bi-${item.bsIcon ? item.bsIcon : `gear` }`"></i>
                 </p>
+                
                 <p v-else class="fs-1 placeholder-glow">
                     <span class="placeholder col-2"></span>  
                 </p>
 
                 <p v-if="state.hardSkillsLoaded"
                 class="fs-4  mb-0"
-                >{{item.name}}</p>    
+                >{{item.name}}</p> 
+
                 <p v-else class="fs-4 placeholder-glow">
                     <span class="placeholder col-8"></span>  
                     <span class="placeholder col-10"></span>  
@@ -76,39 +78,23 @@ const fetchHardSkills = () => {
 <style lang="scss">
 @import 'src/assets/styles/theming';
 .skill-item{
+    transition: $transition-base;
+
     .icon {
-        color: #F9B068;
+        color: $gray-600;
     }
 
-    &:nth-child(odd){
-        .icon {
-            color: #F578CA;
+    &:hover{
+        .icon{
+            color: $primary;
         }
     }
 
-    // &:nth-child(3n+2){
+    // &:nth-child(odd){
     //     .icon {
-    //         color: #F86C6B;
+    //         color: #F578CA;
     //     }
-    // }
-
-    // &:nth-child(2n+1){
-    //     .icon {
-    //         color: #28BEBD;
-    //     }
-    // }    
-
-    // &:nth-child(3n+3){
-    //     .icon {
-    //         color: #A55EEA;
-    //     }
-    // }  
-    
-    // &:nth-child(2n+4){
-    //     .icon {
-    //         color: #F9B068;
-    //     }
-    // }        
+    // }   
 }
 
 </style>

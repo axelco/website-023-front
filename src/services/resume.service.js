@@ -17,6 +17,10 @@ class ResumeService{
     getHardSkillsByContext(){
         return api.get(`/resume/hard-skills/${store.getters['resume/getContext']}`)    
     }
+
+    getSoftSkills(){
+        return api.get(`/resume/soft-skills`)
+    }
     
 }
 

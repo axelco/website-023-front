@@ -1,6 +1,8 @@
 <template>
-    <h2 class="ar-section-title display-5">
-        {{ props.title }}
+    <h2 :class="`ar-section-title ${props.align} `">
+        <span class="display-4">☄️</span>
+        <span class="display-5">{{ props.title }}</span>
+        
     </h2>
 </template>
 
@@ -12,6 +14,10 @@ const props = defineProps({
     type: String,
     required : true,
   },
+  align : {
+    type: String,
+    default : 'center',
+  },  
 })
 
 </script>
@@ -20,22 +26,44 @@ const props = defineProps({
     @import '@/assets/styles/theming';
 
     .ar-section-title {
-        text-align: center;
+        
         position: relative;
-        padding-bottom: 1rem;
+        padding-bottom: 1.5rem;
         margin-bottom: 3rem;
+
+        & > * {
+            display: block;
+        }
 
         &:after{
             content: '';
             position: absolute;
             bottom: 0;
-            width: 80px;
+            width: 100px;
             height: 4px;
-            border-radius: $border-radius;
-            background-color: $primary;
-            left: 50%;
-            margin-left: -40px;
+            border-radius: $border-radius-pill;
+            background-color: $gray-800;
+
         }
+
+        &.center{
+            text-align: center;
+            &:after{
+                left: 50%;
+                margin-left: -50px;
+            }
+
+        }
+
+        &.left{
+            text-align: left;
+            &:after{
+                left: 0%;
+                margin-left: 0;
+            }
+
+        }
+
     }
 
 </style>
