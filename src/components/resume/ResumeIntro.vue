@@ -31,6 +31,12 @@
                                     <h2 v-else class="h5 placeholder-glow">
                                         <span class="placeholder col-10"></span>  
                                     </h2>
+                                    <button 
+                                        class="btn btn-link mt-1" 
+                                        data-bs-toggle="offcanvas" 
+                                        data-bs-target="#aboutOffcanvas" >
+                                        <i class="bi bi-person-badge"></i> Voir ma fiche
+                                    </button>
                                 </div>
                             </div>
                             <div class="right col-12 col-lg-8">
@@ -58,7 +64,8 @@
                         </div>                
                     
                     </div>            
-                </UiCard>            
+                </UiCard>       
+                <InfosOffcanvas />     
             </div>
             
         </UiContainer>  
@@ -70,6 +77,7 @@ import resumeService from '@/services/resume.service';
 import { reactive, computed, onMounted } from 'vue'
 import { useStore } from 'vuex';
 
+import InfosOffcanvas from './InfosOffcanvas.vue';
 import UiSection from '@/components/ui/UiSection.vue';
 import UiContainer from '@/components/ui/UiContainer.vue';
 import UiCard from '../ui/UiCard.vue';
