@@ -1,23 +1,31 @@
 <template>
     <h2 :class="`ar-section-title ${props.align} `">
-        <span class="display-4">☄️</span>
+        <span v-if="ShowEmoji" class="display-4">{{props.emoji}}</span>
         <span class="display-5">{{ props.title }}</span>
         
     </h2>
 </template>
 
 <script setup >
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 
 const props = defineProps({
   title: {
     type: String,
     required : true,
   },
+  emoji: {
+    type: String,
+    default : "",
+  },  
   align : {
     type: String,
     default : 'center',
   },  
+})
+
+const ShowEmoji = computed(()=>{
+    return props.emoji !== ""
 })
 
 </script>

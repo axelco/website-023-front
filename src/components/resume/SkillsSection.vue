@@ -1,7 +1,10 @@
 <template>
     <UiSection>
         <UiContainer size="sm">
-            <SectionTitle :title="`Mes compétences `" align="center" />
+            <SectionTitle 
+                :title="`Mes compétences `" 
+                emoji="☄️"
+                align="center" />
         </UiContainer>
         <UiContainer size="md">
             <SoftskillsList />

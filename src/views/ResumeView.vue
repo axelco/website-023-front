@@ -2,6 +2,7 @@
     <div  v-if="ctxLoaded" >
         <ResumeIntro />
         <SkillsSection />    
+        <ExperiencesSection />
     </div>
 
 </template>
@@ -13,6 +14,7 @@ import { useRouter} from 'vue-router';
 import { useStore } from 'vuex';
 import ResumeIntro from '@/components/resume/ResumeIntro.vue';
 import SkillsSection from '@/components/resume/SkillsSection.vue';
+import ExperiencesSection from '@/components/resume/ExperiencesSection.vue';
 
 const router = useRouter()
 const store = useStore()

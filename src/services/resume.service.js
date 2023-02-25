@@ -21,6 +21,10 @@ class ResumeService{
     getSoftSkills(){
         return api.get(`/resume/soft-skills`)
     }
+
+    getExperiences(){
+        return api.get(`/resume/jobs-grouped`)
+    }
     
 }
 
