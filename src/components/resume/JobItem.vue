@@ -1,5 +1,6 @@
 <template>
     <div class="job-item">
+
         <div v-if="!props.dataLoaded" class="placeholder-glow">
             <h5 class="h2 mb-0 job-title">
                 <span class="placeholder col-10"></span>
@@ -14,9 +15,10 @@
                 <span class="placeholder col-6"></span>
             </p>            
         </div>
+        
         <div v-else>
             <p v-if="isCurrentJob">
-                <span class="badge bg-success">Job actuel</span>
+                <span class="badge bg-primary">Job actuel</span>
             </p>
             <h5 class="h2 mb-0 job-title">{{props.job.name}}</h5>
             <p class="job-metas mb-2">
@@ -25,7 +27,13 @@
             <p 
                 v-if="hasShortDescription" 
                 class="job-description"
-            >{{props.job.shortDescription}}</p>        
+            >{{props.job.shortDescription}}</p>  
+   
+            <RouterLink 
+                v-if="showDetailLink"
+                class="job-link"
+                :to="{name: 'singleJob', params:{id: props.job._id}}"
+            >Voir des détails sur mon job {{ props.job.name }} <i class="icon bi bi-arrow-right"></i></RouterLink> 
         </div>
 
     </div>
@@ -47,7 +55,6 @@ const props = defineProps({
 })
 
 const isCurrentJob = computed(()=>{
-    console.log(props.job.endDate)
     if(props.job.endDate === undefined || props.job.endDate === null ){
         return true
     }
@@ -70,6 +77,13 @@ const datesSentence = computed(()=>{
     const end = new Date(props.job.endDate)
     return `entre ${start.toLocaleString('FR-fr', localeOptions)} et ${end.toLocaleString('FR-fr', localeOptions)}`
         
+})
+
+const showDetailLink = computed(()=>{
+    if(props.job.missionsContent || props.job.successContent){
+        return true
+    }
+    return false
 })
 
 </script>
@@ -95,6 +109,18 @@ const datesSentence = computed(()=>{
         color: $gray-500;
         font-size: 1.1rem;
         
+    }
+
+    .job-link{
+        color: $gray-400;
+
+        &:hover{
+            color: $white;
+        }
+
+        .icon{
+            color: $primary;
+        }
     }
 
 }

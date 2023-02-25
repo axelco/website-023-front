@@ -16,7 +16,12 @@ const routes = [
     path: '/choose-job',
     name: 'chooseJobContext',
     component: () => import('../views/ChooseResume.vue')
-  }  
+  },
+  {
+    path: '/job/:id',
+    name: 'singleJob',
+    component: () => import('../views/JobView.vue')
+  },  
 ]
 
 const router = createRouter({

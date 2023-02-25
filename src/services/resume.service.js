@@ -25,6 +25,10 @@ class ResumeService{
     getExperiences(){
         return api.get(`/resume/jobs-grouped`)
     }
+
+    getSingleJob(id){
+        return api.get(`/resume/jobs/${id}`)
+    }    
     
 }
 
