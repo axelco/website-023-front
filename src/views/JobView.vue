@@ -30,22 +30,25 @@
                     </template>
                     <div>
                         <div v-if="hasShortDescription"
-                            class="d-flex flex-column flex-lg-row mb-2 mb-lg-4"
+                            class=" mb-2 mb-lg-3 "
                         >
-                            <i class="bi bi-quote me-1 fs-1 text-primary"></i>
-                            <p class="short-description flex-grow-1 ms-1 ms-lg-0">{{ state.job.item.shortDescription }}</p>
+                            <h3 class="h4 mb-lg-2">
+                                <span class="h3">✍️</span> Description</h3>
+                            <p class="short-description ps-0 ps-lg-3">
+                                
+                                {{ state.job.item.shortDescription }}</p>
                         </div>
                         <div class="row gx-4">
-                            <div v-if="hasSuccess" class="col-12 mb-2 ">
+                            <div v-if="hasSuccess" class="col-12 mb-2 mb-lg-3 ">
                                 <div class="h-100">
-                                    <h3 class="h4 mb-2"><span class="h3">🚀</span> Succès</h3>
-                                    <div  v-html="state.job.item.successContent"></div>                                
+                                    <h3 class="h4 mb-lg-2"><span class="h3">🚀</span> Succès</h3>
+                                    <div  v-html="state.job.item.successContent" class="ps-0 ps-lg-3"></div>                                
                                 </div>                            
                             </div>
-                            <div v-if="hasMissions" class="col-12 mb-2 ">
+                            <div v-if="hasMissions" class="col-12 mb-2 mb-lg-3 ">
                                 <div class="h-100">
-                                    <h3 class="h4 mb-2"><span class="h3">📐</span> Mon quotidien</h3>
-                                    <div v-html="state.job.item.missionsContent"></div>                                
+                                    <h3 class="h4 mb-lg-2"><span class="h3">📐</span> Mon quotidien</h3>
+                                    <div v-html="state.job.item.missionsContent" class="ps-0 ps-lg-3"></div>                                
                                 </div>
 
                             </div>                        
