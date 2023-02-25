@@ -93,7 +93,7 @@ const datesSentence = computed(()=>{
 
     .job-description{
         color: $gray-500;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         
     }
 
