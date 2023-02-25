@@ -47,7 +47,11 @@ const props = defineProps({
 })
 
 const isCurrentJob = computed(()=>{
-    return props.job.endDate !== undefined && props.job.endDate === null 
+    console.log(props.job.endDate)
+    if(props.job.endDate === undefined || props.job.endDate === null ){
+        return true
+    }
+    return false
 })
 
 const hasShortDescription = computed(()=>{
