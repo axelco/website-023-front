@@ -2,16 +2,13 @@
     <nav id="nav">
         <UiContainer size="xl" >
             <div class="left">
-                <RouterLink :to="{name: 'resume'}" class="nav-link">
+                <button @click="handleGoBack()"  class="nav-link">
                     <i class="bi bi-arrow-left"></i> Retour
-                </RouterLink>
-            
+                </button>
             </div>        
         </UiContainer>
 
     </nav>
-
-
     <div id="pageContent">
         <UiSection size="md" >
             <UiContainer size="md">
@@ -90,7 +87,6 @@ const state = reactive({
 
 onMounted(()=>{
     fetchJob()
-    console.log(window.history)
 })
 
 const hasShortDescription = computed(()=>{
@@ -138,6 +134,16 @@ const datesSentence = computed(()=>{
         
 })
 
+const handleGoBack = () => {
+    const prevPage = window.history.state.back
+    if(prevPage === null){
+        router.push({name: 'resume'})
+    }else{
+        router.back()
+    }
+    
+}
+
 const fetchJob = () => {
     state.job.loaded = false
     resumeService.getSingleJob(route.params.id)
@@ -169,6 +175,12 @@ const fetchJob = () => {
     width: 100%;
     top: 0;
     border-bottom: 1px solid $black;
+
+    .nav-link{
+        color: $gray-300;
+        background: transparent;
+        border: none;
+    }
 }
 
 #pageContent{
