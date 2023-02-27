@@ -3,6 +3,7 @@ export default {
     state: {
         resumeContext : "",
         ctxLoaded : false,
+        showAvailability : true,
     },
     getters: {
         getContext : state => {
@@ -10,6 +11,9 @@ export default {
         },
         isContextLoaded : state => {
             return state.ctxLoaded
+        },
+        showAvailability : state => {
+            return state.showAvailability
         }
               
     },
@@ -19,12 +23,21 @@ export default {
             state.resumeContext = ctx
             state.ctxLoaded = true
         },   
+
+        TOGGLE_IGNORE_AVAILABILITY(state){
+            state.showAvailability = !state.showAvailability
+        }
     },
 
     actions: {
       setContext({commit}, ctx){
         commit('SET_CONTEXT', ctx)
-      }     
+      },   
+      
+      toggleAvailabilityBanner({commit}){
+        commit('TOGGLE_IGNORE_AVAILABILITY')
+      }
+
   
     },
   }

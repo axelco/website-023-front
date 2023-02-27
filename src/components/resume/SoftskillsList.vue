@@ -60,7 +60,7 @@ const fetchSoftSkills = () => {
         &:before{
             content: '#';
             margin-right: .5rem;
-            color: #F9B068;
+            color: $primary;
         }
         display: flex;
         font-size: 1.1rem;

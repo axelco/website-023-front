@@ -71,7 +71,7 @@ const getFullName = computed(()=>{
 })
 
 const fetchJobsPossible = () => {
-    ResumeService.getJobTypes()
+    ResumeService.getResumeContexts()
     .then(
         (res) => {
             state.jobsPossible = res.data

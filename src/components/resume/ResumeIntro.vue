@@ -1,7 +1,9 @@
 <template>
     <UiSection >
         <UiContainer  >
-            <div v-if="state.introLoaded && state.introApiErrors !==null" class="alert alert-warning">
+            <div v-if="state.introLoaded && state.introApiErrors !==null" 
+                class="alert alert-warning"
+            >
                 <p class="fs-4">Une erreur est survenue 💫. Détail de l'erreur</p>
                 <p>{{ state.introApiErrors }}</p>
             </div>
@@ -17,8 +19,7 @@
                     :show-footer="false"
                     :show-header="false">
 
-                    <div class="container-fluid">
-                        <div class="row gx-5">
+                    <div class="row gx-5">
                             <div class="left col-12 col-lg-4 mb-2 mb-lg-0 ">
                                 <div class="h-100">
                                     <img 
@@ -61,9 +62,7 @@
                                     </p>                            
                                 </div>              
                             </div>
-                        </div>                
-                    
-                    </div>            
+                        </div>              
                 </UiCard>       
                 <InfosOffcanvas />     
             </div>

@@ -90,6 +90,7 @@ const state = reactive({
 
 onMounted(()=>{
     fetchJob()
+    console.log(window.history)
 })
 
 const hasShortDescription = computed(()=>{

@@ -4,9 +4,9 @@ import store from "@/store";
 class ResumeService{
     // Récupère la liste des jobs possibles dans l'API
     // Afin d'afficher cette liste dans la page de choix du job de CV
-    getJobTypes(){
+    getResumeContexts(){
 
-        return api.get(`/resume/job-types`)
+        return api.get(`/resume/contexts`)
     }
 
     getIntroByContext(){
