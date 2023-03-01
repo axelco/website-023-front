@@ -22,11 +22,25 @@ const routes = [
     name: 'singleJob',
     component: () => import('../views/JobView.vue')
   },  
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/ContactView.vue')
+  },  
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/resume',
+  },   
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass : "active",
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 }
+  },    
 })
 
 export default router

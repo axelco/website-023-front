@@ -3,7 +3,7 @@
         <UiContainer size="xl" >
             <div class="left">
                 <button @click="handleGoBack()"  class="nav-link">
-                    <i class="bi bi-arrow-left"></i> Retour
+                    <i class="bi bi-arrow-left"></i> Retour au CV
                 </button>
             </div>        
         </UiContainer>
@@ -136,6 +136,7 @@ const datesSentence = computed(()=>{
 
 const handleGoBack = () => {
     const prevPage = window.history.state.back
+    console.log(prevPage)
     if(prevPage === null){
         router.push({name: 'resume'})
     }else{
@@ -174,7 +175,9 @@ const fetchJob = () => {
     position: fixed;
     width: 100%;
     top: 0;
+    background-color: $dark;
     border-bottom: 1px solid $black;
+    z-index: 550;
 
     .nav-link{
         color: $gray-300;

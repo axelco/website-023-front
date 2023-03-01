@@ -1,6 +1,7 @@
 <template>
     <div  v-if="ctxLoaded" >
         <AvailablityBanner />
+        <TopNav />
         <ResumeIntro />
         <SkillsSection />    
         <ExperiencesSection />
@@ -18,6 +19,7 @@ import ResumeIntro from '@/components/resume/ResumeIntro.vue';
 import SkillsSection from '@/components/resume/SkillsSection.vue';
 import ExperiencesSection from '@/components/resume/ExperiencesSection.vue';
 import AvailablityBanner from '@/components/common/AvailablityBanner.vue';
+import TopNav from '@/components/resume/TopNav.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -28,6 +30,9 @@ const ctxLoaded = computed(()=> {
 })
 
 onMounted(()=>{
+    // On va contrôler si il y a une query resumeContext dans l'URL
+    // Si oui, on va setter le resumeCOntext avec sa valeur
+        // Sinon on va lancer le check de context dans le store / localStorage
     const resumeCtxQuery = route.query.resumeContext
     const queryValid = resumeCtxQuery !== undefined && resumeCtxQuery !== ""
     if(queryValid){
@@ -47,7 +52,6 @@ const checkResumeContext = () => {
         }else{
             router.push({name: 'chooseJobContext'})
         }
-        
 
     }
 }

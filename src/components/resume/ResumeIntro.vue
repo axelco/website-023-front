@@ -8,12 +8,6 @@
                 <p>{{ state.introApiErrors }}</p>
             </div>
             <div v-else>
-                <RouterLink 
-                    :to="{name: 'chooseJobContext'}"
-                    class="btn btn-link mb-1"
-                    >
-                    <i class="bi bi-arrow-left"></i> Modifier le job recherché
-                </RouterLink>
                 <UiCard                     
                     id="introCard"
                     :show-footer="false"
