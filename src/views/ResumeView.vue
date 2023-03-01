@@ -28,9 +28,11 @@ const ctxLoaded = computed(()=> {
 
 onMounted(()=>{
     const localStorageContext = localStorageService.getResumeContext()
+    console.log(localStorageContext)
     const storeResumeCtx = store.getters['resume/getContext']
     if(storeResumeCtx === ""){
-        if(localStorageContext !== ""){
+        if(localStorageContext !== "" && localStorageContext !== null){
+
             store.dispatch('resume/setContext', localStorageContext)
         }else{
             router.push({name: 'chooseJobContext'})
