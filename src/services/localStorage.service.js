@@ -1,14 +1,14 @@
 
-const JOB_KEY = 'job_chosen'
+const JOB_KEY = 'resume_context'
 class LocalStorageService{
 
     
 
-    getJobChosen(){
+    getResumeContext(){
         return localStorage.getItem(JOB_KEY);
     }
 
-    setJobChosen(value){
+    setResumeContext(value){
         localStorage.setItem(JOB_KEY, value)
     }
     

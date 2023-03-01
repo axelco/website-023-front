@@ -1,3 +1,4 @@
+import localStorageService from "@/services/localStorage.service"
 export default {
     namespaced : true,  
     state: {
@@ -22,6 +23,7 @@ export default {
         SET_CONTEXT(state, ctx){     
             state.resumeContext = ctx
             state.ctxLoaded = true
+            localStorageService.setResumeContext(ctx)
         },   
 
         TOGGLE_IGNORE_AVAILABILITY(state){

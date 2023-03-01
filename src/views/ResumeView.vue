@@ -13,6 +13,7 @@
 import { onMounted, computed } from 'vue';
 import { useRouter} from 'vue-router';
 import { useStore } from 'vuex';
+import localStorageService from '@/services/localStorage.service';
 import ResumeIntro from '@/components/resume/ResumeIntro.vue';
 import SkillsSection from '@/components/resume/SkillsSection.vue';
 import ExperiencesSection from '@/components/resume/ExperiencesSection.vue';
@@ -26,10 +27,15 @@ const ctxLoaded = computed(()=> {
 })
 
 onMounted(()=>{
+    const localStorageContext = localStorageService.getResumeContext()
     const storeResumeCtx = store.getters['resume/getContext']
-    console.log(storeResumeCtx)
     if(storeResumeCtx === ""){
-        router.push({name: 'chooseJobContext'})
+        if(localStorageContext !== ""){
+            store.dispatch('resume/setContext', localStorageContext)
+        }else{
+            router.push({name: 'chooseJobContext'})
+        }
+        
 
     }
 
