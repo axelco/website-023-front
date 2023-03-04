@@ -1,11 +1,17 @@
 <template>
-    <nav id="nav">
-        <UiContainer size="xl" >
-            <div class="left">
-                <button @click="handleGoBack()"  class="nav-link">
-                    <i class="bi bi-arrow-left"></i> Retour au CV
-                </button>
-            </div>        
+    <AvailablityBanner />
+    <nav id="jobNav" :class="{fixed : state.fixNav}">
+        <UiContainer >
+            <ul class="nav-menu">
+                <li>
+                    <button @click="handleGoBack()"  class="nav-link">
+                        <i class="icon bi bi-arrow-left"></i>
+                        <span class="text">Retour au CV</span>
+                    </button>                
+                </li>
+
+            </ul>    
+            <NavCtas />    
         </UiContainer>
 
     </nav>
@@ -72,6 +78,8 @@ import UiSection from '@/components/ui/UiSection.vue';
 import UiContainer from '@/components/ui/UiContainer.vue';
 import UiCard from '@/components/ui/UiCard.vue';
 import UiSpinner from '@/components/ui/UiSpinner.vue';
+import NavCtas from '@/components/common/NavCtas.vue';
+import AvailablityBanner from '@/components/common/AvailablityBanner.vue';
 
 const route = useRoute()
 const router = useRouter()
@@ -80,13 +88,16 @@ const state = reactive({
         item : {},
         loaded: false,
         
-    } 
+    } ,
+    fixNav : false,
 })
 
 
 
 onMounted(()=>{
     fetchJob()
+    setFixNav()
+    window.addEventListener('scroll', setFixNav)    
 })
 
 const hasShortDescription = computed(()=>{
@@ -134,6 +145,11 @@ const datesSentence = computed(()=>{
         
 })
 
+const setFixNav = () => {
+    state.fixNav = window.scrollY > 200 ? true : false
+
+}
+
 const handleGoBack = () => {
     const prevPage = window.history.state.back
     console.log(prevPage)
@@ -164,35 +180,73 @@ const fetchJob = () => {
 </script>
 
 <style lang="scss">
+    @import '@/assets/styles/theming';
+    
+    #jobNav{
+        background-color: $black;
+        padding-top: .25rem;
+        padding-bottom: .25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 60px;
 
-@import '@/assets/styles/theming';
+        &.fixed{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 550;
+        }
 
-#nav{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 50px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    background-color: $dark;
-    border-bottom: 1px solid $black;
-    z-index: 550;
+        .container{
+            display: flex;
+            justify-content: space-between;
+        }
 
-    .nav-link{
-        color: $gray-300;
-        background: transparent;
-        border: none;
+        .nav-menu{
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 0;
+            display: flex;
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                padding: .5rem;
+                background-color: transparent;
+                border: none;
+
+                &:hover{
+                    color: $gray-500;
+                }
+                .icon{
+                    margin-right: .5rem;
+                    font-size: 1.4rem;
+                }
+
+                .text{
+                    display: none;
+                }
+
+                &.primary{
+                    color: $primary;
+                    &:hover{
+                        color: rgba($primary, .7);
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-up(md){
+            .nav-menu {
+                .nav-link {
+                    .text {
+                        display: inline;
+                    }
+                }
+
+            }
+        }
     }
-}
-
-#pageContent{
-    margin-top: 50px;
-    color: $gray-500;
-}
-
-.short-description{
-    font-size: 1.3rem;
-}
-
 </style>

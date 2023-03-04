@@ -12,67 +12,25 @@
                     </RouterLink>
                 </li>
             </ul>
-            <ul class="nav-menu">
-                
-                <li>
-                    <RouterLink 
-                        :to="{name: 'contact'}"
-                        class="nav-link"
-                    >
-                        <i class="icon bi bi-envelope-check"></i>
-                        <span class="text">Contact</span>
-                    </RouterLink>
-                </li>         
-                <li v-if="resumePdf !== null">
-                    <a 
-                        :href="resumePdf" 
-                        target="_blank" 
-                        class="nav-link primary"
-                    >
-                        <i class="icon bi bi-file-earmark-arrow-down"></i>
-                        <span class="text">CV PDF</span>
-                    </a>
-                </li>                   
-                <li>
-                    <a 
-                        :href="linkedinUrl" 
-                        target="_blank" 
-                        class="nav-link"
-                    >
-                        <i class="icon bi bi-linkedin"></i>
-                        <span class="text">Linkedin</span>
-                    </a>
-                </li>
-
-            </ul>  
+            <NavCtas />
         </UiContainer>
     </nav>
 
 </template>
 
 <script setup >
-import { onMounted, reactive, computed } from 'vue';
-import { useStore } from 'vuex';
+import { onMounted, reactive } from 'vue';
 import UiContainer from '../ui/UiContainer.vue';
+import NavCtas from '../common/NavCtas.vue';
 
 const state =reactive({
     fixNav : false
 })
 
-const store = useStore()
 
 onMounted(()=> {
     setFixNav()
     window.addEventListener('scroll', setFixNav)
-})
-
-const linkedinUrl = computed(()=>{
-
-    return store.getters['infos/getLinkedinUrl']
-})
-
-const resumePdf = computed(()=>{
-    return store.getters['resume/getResume']
 })
 
 // onUnmounted(()=> {
@@ -89,6 +47,7 @@ const setFixNav = () => {
 
 <style lang="scss">
     @import '@/assets/styles/theming';
+    
     #resumeNav{
         background-color: $black;
         padding-top: .25rem;
