@@ -1,4 +1,7 @@
 import localStorageService from "@/services/localStorage.service"
+import ResumePO from "@/assets/pdf/CV_Alexandre-Rozec_Product-Owner.pdf";
+import ResumeBA from "@/assets/pdf/CV_Alexandre-Rozec_Business Analyst.pdf";
+
 export default {
     namespaced : true,  
     state: {
@@ -15,6 +18,15 @@ export default {
         },
         showAvailability : state => {
             return state.showAvailability
+        },
+        getResume : state => {
+            switch(state.resumeContext){
+                case '63ee5393276882fa9c0b658d' :
+                    return ResumeBA
+
+                default :
+                    return ResumePO 
+            }
         }
               
     },

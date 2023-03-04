@@ -13,6 +13,7 @@
                 </li>
             </ul>
             <ul class="nav-menu">
+                
                 <li>
                     <RouterLink 
                         :to="{name: 'contact'}"
@@ -21,7 +22,17 @@
                         <i class="icon bi bi-envelope-check"></i>
                         <span class="text">Contact</span>
                     </RouterLink>
-                </li>            
+                </li>         
+                <li>
+                    <a 
+                        :href="resumePdf" 
+                        target="_blank" 
+                        class="nav-link primary"
+                    >
+                        <i class="icon bi bi-file-earmark-arrow-down"></i>
+                        <span class="text">CV PDF</span>
+                    </a>
+                </li>                   
                 <li>
                     <a 
                         :href="linkedinUrl" 
@@ -58,6 +69,10 @@ onMounted(()=> {
 const linkedinUrl = computed(()=>{
 
     return store.getters['infos/getLinkedinUrl']
+})
+
+const resumePdf = computed(()=>{
+    return store.getters['resume/getResume']
 })
 
 // onUnmounted(()=> {
@@ -117,6 +132,13 @@ const setFixNav = () => {
 
                 .text{
                     display: none;
+                }
+
+                &.primary{
+                    color: $primary;
+                    &:hover{
+                        color: rgba($primary, .7);
+                    }
                 }
             }
         }
