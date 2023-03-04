@@ -23,7 +23,7 @@
                         <span class="text">Contact</span>
                     </RouterLink>
                 </li>         
-                <li>
+                <li v-if="resumePdf !== null">
                     <a 
                         :href="resumePdf" 
                         target="_blank" 

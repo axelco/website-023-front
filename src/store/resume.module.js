@@ -24,8 +24,11 @@ export default {
                 case '63ee5393276882fa9c0b658d' :
                     return ResumeBA
 
+                case '63ee5354276882fa9c0b658c' :
+                    return ResumePO                    
+
                 default :
-                    return ResumePO 
+                    return null 
             }
         }
               
