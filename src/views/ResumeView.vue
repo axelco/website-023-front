@@ -15,6 +15,8 @@ import { onMounted, computed } from 'vue';
 import { useRouter, useRoute} from 'vue-router';
 import { useStore } from 'vuex';
 import localStorageService from '@/services/localStorage.service';
+import resumeService from '@/services/resume.service';
+
 import ResumeIntro from '@/components/resume/ResumeIntro.vue';
 import SkillsSection from '@/components/resume/SkillsSection.vue';
 import ExperiencesSection from '@/components/resume/ExperiencesSection.vue';
@@ -30,25 +32,65 @@ const ctxLoaded = computed(()=> {
 })
 
 onMounted(()=>{
-    // On va contrôler si il y a une query resumeContext dans l'URL
-    // Si oui, on va setter le resumeCOntext avec sa valeur
-        // Sinon on va lancer le check de context dans le store / localStorage
-    const resumeCtxQuery = route.query.resumeContext
-    const queryValid = resumeCtxQuery !== undefined && resumeCtxQuery !== ""
-    if(queryValid){
-        setResumeContext(resumeCtxQuery)
-        router.push({name: 'resume'})
+    // On vérifie si la query resumeContext est envoyée et valide
+        // Si oui, on lance un check de la query
+        // Sinon, on lance un check du storage 
+    if(isQueryCtxSent()){
+        checkCtxQuery()
     }else{
-        checkResumeContext()
+        checkCtxStorage()
     }
+    
 })
 
-const checkResumeContext = () => {
+const isQueryCtxSent = () =>{
+    const resumeCtxQuery = route.query.resumeContext
+    const queryValid = resumeCtxQuery !== undefined && resumeCtxQuery !== ""
+    
+    return queryValid
+}
+
+const checkCtxQuery = () =>{
+    const resumeCtxQuery = route.query.resumeContext
+    resumeService.getSingleResumeContext(resumeCtxQuery)
+        .then(
+            (res)=>{
+                if(res.data === null){
+                    router.push({name: 'chooseJobContext'})
+                }else{
+                    setResumeContext(resumeCtxQuery)
+                    router.push({name: 'resume'})                    
+                }
+            }
+        ).catch(
+            ()=>{
+                router.push({name: 'chooseJobContext'})
+            }
+        )
+}
+
+const checkCtxStorage = () => {
     const storeResumeCtx = store.getters['resume/getContext']
     if(storeResumeCtx === ""){
         const localStorageContext = localStorageService.getResumeContext()
         if(localStorageContext !== "" && localStorageContext !== null){
-            setResumeContext(localStorageContext)
+            resumeService.getSingleResumeContext(localStorageContext)
+            .then(
+                (res)=>{
+                    if(res.data === null){
+                        localStorageService.destroyResumeContext()
+                        router.push({name: 'chooseJobContext'})
+                    }else{
+                        setResumeContext(localStorageContext)                
+                    }
+                }
+            ).catch(
+                ()=>{
+                    localStorageService.destroyResumeContext()
+                    router.push({name: 'chooseJobContext'})
+                }
+            )
+
         }else{
             router.push({name: 'chooseJobContext'})
         }

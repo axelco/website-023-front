@@ -1,15 +1,19 @@
 
-const JOB_KEY = 'resume_context'
+const CTX_KEY = 'resume_context'
 class LocalStorageService{
 
     
 
     getResumeContext(){
-        return localStorage.getItem(JOB_KEY);
+        return localStorage.getItem(CTX_KEY);
     }
 
     setResumeContext(value){
-        localStorage.setItem(JOB_KEY, value)
+        localStorage.setItem(CTX_KEY, value)
+    }
+
+    destroyResumeContext(){
+        localStorage.removeItem(CTX_KEY)
     }
     
 }

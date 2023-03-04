@@ -9,6 +9,10 @@ class ResumeService{
         return api.get(`/resume/contexts`)
     }
 
+    getSingleResumeContext(id){
+        return api.get(`/resume/contexts/${id}`)
+    }
+
     getIntroByContext(){
         return api.get(`/resume/intro/${store.getters['resume/getContext']}`)
   
