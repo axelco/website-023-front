@@ -92,7 +92,8 @@ const showDetailLink = computed(()=>{
 @import 'src/assets/styles/theming';
 
 .job-item{
-    padding: 1.5rem 2rem;
+    
+    padding: 2rem 2rem;
     border-bottom: 1px solid $dark;
     // height: 100%;
 

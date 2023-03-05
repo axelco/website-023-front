@@ -18,23 +18,43 @@
                     >Réessayer</button>
                 </div>
             </div>
-            <div 
-                v-else
-                class="row mt-2 mt-lg-5"
-            >
+            <div v-else>
                 <div 
-                    class="col-12 mb-2 col-md-6  col-lg-4"
-                    v-for="item in state.graduatedDiplomas"
-                    :key="item._id"                    
+                    v-if="hasInProgressDiplomas"
+                    class="row my-2 my-lg-5"
                 >
-                    <DiplomaItem 
-                        class="h-100"
-                        :diploma="item" 
-                        :loaded="state.diplomasLoaded"
-                        :showHeaderBorder="false"
-                    />
-                </div>                        
-            </div>            
+                    <div
+                        v-for="item in state.inProgessDiplomas" 
+                        :key="item._id"
+                        :class="`col-12 mb-2 ${hasMoreThanOneProgressDiploma ? 'col-md-6' : 'col-md-8 offset-md-2'}`"
+                    >
+                        <DiplomaItem 
+                                class="h-100"
+                                :diploma="item" 
+                                :loaded="state.diplomasLoaded"
+                                :showHeaderBorder="false"
+                            />                
+                    </div>                       
+                </div> 
+
+                <div 
+                    class="row "
+                >
+                    <div 
+                        class="col-12 mb-2 col-md-6  col-lg-4"
+                        v-for="item in state.graduatedDiplomas"
+                        :key="item._id"                    
+                    >
+                        <DiplomaItem 
+                            class="h-100"
+                            :diploma="item" 
+                            :loaded="state.diplomasLoaded"
+                            :showHeaderBorder="false"
+                        />
+                    </div>                        
+                </div>                           
+            </div>
+            
         </UiContainer>
         
     </UiSection>
@@ -44,7 +64,7 @@
 
 <script setup >
 
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 import resumeService from '@/services/resume.service';
 
 import UiSection from '../ui/UiSection.vue';
@@ -57,11 +77,20 @@ const state = reactive({
     diplomasLoaded : false,
     diplomasApiError : null,
     graduatedDiplomas : [{},{}, {}, {},{}, {}],
+    inProgessDiplomas : [{}],
 })
 
 onMounted(()=>{
     fetchDiplomas()
 })
+
+const hasInProgressDiplomas = computed(()=>{
+    return state.inProgessDiplomas.length > 0
+})
+
+const hasMoreThanOneProgressDiploma = computed(()=>{
+    return state.inProgessDiplomas.length > 1
+}) 
 
 const fetchDiplomas = () => {
     
@@ -72,6 +101,9 @@ const fetchDiplomas = () => {
             state.diplomasLoaded = true
             state.diplomasApiError = null
             state.graduatedDiplomas = res.data.graduated
+            state.inProgessDiplomas = res.data.inProgress
+
+            console.log(state.inProgessDiplomas)
         }
     )
     .catch(

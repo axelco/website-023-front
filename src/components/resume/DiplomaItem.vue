@@ -1,6 +1,7 @@
 <template>
     <UiCard class="diploma-card" :show-footer="false"> 
         <template #header  >
+
             <p v-if="!props.loaded" class="placeholder-glow w-50  mb-0">
                 <span class="placeholder col-6"></span>
             </p>
@@ -9,13 +10,20 @@
                 class="diploma-icon"
                 :src="setIcon" 
             />
+
             <p 
                 v-if="!props.loaded" 
                 class="graduated-year placeholder-glow w-50 mb-0 text-end"
             >
                 <span class="placeholder col-4 mb-0"></span>
             </p>
-            <p v-else class="graduated-year">{{ getDateOfGraduation }}</p>
+            <div class="header-right" v-else>
+                <p v-if="isGraduated"  class="graduated-year mb-0">{{ getDateOfGraduation }}</p>
+                <p v-else class="mb-0"><span class="badge bg-warning text-dark" >En cours</span></p>
+            
+            </div>
+
+            
         </template>
 
         <h3 v-if="!props.loaded"  class="title placeholder-glow">
@@ -66,6 +74,12 @@ const getDateOfGraduation = computed(()=>{
 const setIcon = computed(()=>{
     return props.diploma.type === "certificate" ? certificateImg : diplomaImg
 })
+
+const isGraduated = computed(()=>{
+    return props.diploma.graduated
+})
+
+
 </script>
 
 <style lang="scss">
@@ -80,11 +94,17 @@ const setIcon = computed(()=>{
             // flex-grow : 1;
         }
 
-        .graduated-year{
+        .header-right{
             margin-left: auto;
-            margin-bottom: 0;
-            color: $gray-500;
+
+            .graduated-year{
+            
+                margin-bottom: 0;
+                color: $gray-500;
+            }
+
         }
+
     }
 
     .card-body{

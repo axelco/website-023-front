@@ -10,6 +10,7 @@
             <div v-else>
                 <UiCard                     
                     id="introCard"
+                    class="py-2 py-lg-4"
                     :show-footer="false"
                     :show-header="false">
 
