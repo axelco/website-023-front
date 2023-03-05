@@ -1,7 +1,11 @@
 <template>
 
     <div class="card">
-        <div v-if="showHeader" class="card-header">
+        <div 
+            v-if="showHeader" 
+            :class="{'no-border' : !showHeaderBorder}" 
+            class="card-header"
+        >
             <slot name="header"></slot>
         </div>
         <div class="card-body">
@@ -28,6 +32,10 @@ defineProps({
     type: Boolean,
     default : true,
   },
+  showHeaderBorder : {
+    type: Boolean,
+    default: true,
+  },  
   showFooter: {
     type: Boolean,
     default : true,
@@ -35,7 +43,7 @@ defineProps({
   showFooterBorder : {
     type: Boolean,
     default: false,
-  }
+  },
 })
 
 </script>
@@ -54,13 +62,12 @@ defineProps({
     .card-header, .card-footer{
         border-color: $dark;
         padding: 1rem 1.5rem;
-    }
 
-    .card-footer {
         &.no-border{
             border-width: 0;
-        }
+        }        
     }
+
 }
 
 </style>

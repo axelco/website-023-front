@@ -5,6 +5,7 @@
         <ResumeIntro />
         <SkillsSection />    
         <ExperiencesSection />
+        <DiplomasSection />
     </div>
 
 </template>
@@ -20,6 +21,7 @@ import resumeService from '@/services/resume.service';
 import ResumeIntro from '@/components/resume/ResumeIntro.vue';
 import SkillsSection from '@/components/resume/SkillsSection.vue';
 import ExperiencesSection from '@/components/resume/ExperiencesSection.vue';
+import DiplomasSection from '@/components/resume/DiplomasSection.vue';
 import AvailablityBanner from '@/components/common/AvailablityBanner.vue';
 import TopNav from '@/components/resume/TopNav.vue'
 

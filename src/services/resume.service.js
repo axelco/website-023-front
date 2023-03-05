@@ -33,6 +33,10 @@ class ResumeService{
     getSingleJob(id){
         return api.get(`/resume/jobs/${id}`)
     }    
+
+    getDiplomas(){
+        return api.get(`/resume/diplomas`)   
+    }
     
 }
 
