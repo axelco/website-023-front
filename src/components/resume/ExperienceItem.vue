@@ -5,6 +5,7 @@
             <div class="experience-company">
                 <div v-if="props.dataLoaded">
                     <h3 class="h4 company-title">{{props.company.name}}</h3>
+                    <p>{{ nbYearsInCompany }}</p>
                     <p v-if="hasCompanyDescription" class="company-description">
                         {{props.company.description}}
                     </p>                
@@ -64,6 +65,33 @@
         }
 
         return false
+    })
+
+    const nbYearsInCompany = computed(()=>{
+
+        const start = new Date(props.company.startDate);
+        let end = !props.company.endDate ? new Date() : new Date(props.company.endDate);
+
+        let allYears= end.getFullYear() - start.getFullYear();
+        let partialMonths = end.getMonth() - start.getMonth();
+        if (partialMonths < 0) {
+            allYears--;
+            partialMonths = partialMonths + 12;
+        }
+
+        let total;
+        if(allYears === 0){
+            total = partialMonths + " mois";
+        }
+        else if(partialMonths === 0 ){
+            total = allYears + " ans ";       
+        }else{
+            
+            total = allYears + " ans et " + partialMonths + " mois";
+        }
+        var beginString = !props.company.endDate ? "Depuis" : "Pendant";
+
+        return beginString+" "+total         
     })
 
 

@@ -22,7 +22,7 @@
             </p>
             <h5 class="h2 mb-0 job-title">{{props.job.name}}</h5>
             <p class="job-metas mb-2">
-                <span class="text-uppercase">{{ props.job.contractType }}</span> - {{datesSentence}}
+                <span class="text-uppercase">{{ props.job.contractType }}</span> - {{datesSentence}} ({{ nbYearsInJob }})
             </p>
             <p 
                 v-if="hasShortDescription" 
@@ -77,6 +77,32 @@ const datesSentence = computed(()=>{
     const end = new Date(props.job.endDate)
     return `entre ${start.toLocaleString('FR-fr', localeOptions)} et ${end.toLocaleString('FR-fr', localeOptions)}`
         
+})
+
+const nbYearsInJob = computed(()=>{
+
+    const start = new Date(props.job.startDate);
+    let end = !props.job.endDate ? new Date() : new Date(props.job.endDate);
+
+    let allYears= end.getFullYear() - start.getFullYear();
+    let partialMonths = end.getMonth() - start.getMonth();
+    if (partialMonths < 0) {
+        allYears--;
+        partialMonths = partialMonths + 12;
+    }
+
+    let total;
+    if(allYears === 0){
+        total = partialMonths + " mois";
+    }
+    else if(partialMonths === 0 ){
+        total = allYears + " ans";       
+    }else{
+        
+        total = allYears + " ans et " + partialMonths + " mois";
+    }
+
+    return total         
 })
 
 const showDetailLink = computed(()=>{
