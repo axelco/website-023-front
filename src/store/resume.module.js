@@ -19,12 +19,12 @@ export default {
         showAvailability : state => {
             return state.showAvailability
         },
-        getResume : state => {
+        getResumePDF : state => {
             switch(state.resumeContext){
-                case '63ee5393276882fa9c0b658d' :
+                case 'business-analyst' :
                     return ResumeBA
 
-                case '63ee5354276882fa9c0b658c' :
+                case 'product-owner' :
                     return ResumePO                    
 
                 default :
