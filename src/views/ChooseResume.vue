@@ -7,7 +7,8 @@
       <p class="fs-2">Quel poste recherchez-vous ?</p>
     </UiContainer>
     <UiContainer size="md" class="mt-4">
-      <div class="row">
+      <UiSpinner v-if="!state.contextLoaded"></UiSpinner>
+      <div v-else class="row">
         <div
           class="col-12 mb-2 col-lg-6"
           v-for="item in state.jobsPossible"
@@ -46,12 +47,15 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 import ResumeService from "@/services/resume.service";
+
 import UiSection from "@/components/ui/UiSection.vue";
 import UiContainer from "@/components/ui/UiContainer.vue";
 import UiCard from "@/components/ui/UiCard.vue";
+import UiSpinner from "@/components/ui/UiSpinner.vue";
 
 const state = reactive({
   jobsPossible: [],
+  contextLoaded: false,
 });
 const router = useRouter();
 const store = useStore();
@@ -61,11 +65,16 @@ const getFullName = computed(() => {
 });
 
 const fetchJobsPossible = () => {
+  state.contextLoaded = false;
   ResumeService.getResumeContexts()
     .then((res) => {
+      state.contextLoaded = true;
       state.jobsPossible = res.data;
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      state.contextLoaded = true;
+      console.error(error);
+    });
 };
 
 // Au clic du choix Utilisateur
