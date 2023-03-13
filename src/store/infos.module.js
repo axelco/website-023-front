@@ -59,12 +59,13 @@ export default {
     mutations: {    
         SET_INFOS(state, data){     
             state.infos = data
-        },   
+        },            
     },
+
     actions: {
       storeInfos({commit}, data){
         commit('SET_INFOS', data)
-      }     
+      },     
   
     },
   }

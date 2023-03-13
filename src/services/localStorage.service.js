@@ -1,5 +1,7 @@
 
 const CTX_KEY = 'resume_context'
+const THEME_KEY = 'theme'
+
 class LocalStorageService{
 
     
@@ -14,6 +16,18 @@ class LocalStorageService{
 
     destroyResumeContext(){
         localStorage.removeItem(CTX_KEY)
+    }
+
+    getTheme(){
+       return localStorage.getItem(THEME_KEY);
+    }
+
+    setTheme(theme){
+        return localStorage.setItem(THEME_KEY, theme);
+    }    
+
+    removeTheme(){
+        localStorage.removeItem(THEME_KEY)
     }
     
 }

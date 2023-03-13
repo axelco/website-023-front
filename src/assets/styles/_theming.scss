@@ -1,11 +1,5 @@
-$primary :#20c997;
-$dark : #222222;
-$black : #171717;
-// $secondary : #FFF500;
-$success : #09e1c0;
-$danger : #FF3C38;
-$warning : #FFE440;
-$white : #ffffff;
+
+
 
 $font-weight-base : 300;
 $font-family-base : 'Poppins', sans-serif ;
@@ -36,7 +30,38 @@ $container-max-widths: (
 // Navbar
 $topnav-height : 70px;
 
+// COLORS OVERRIDES
+// $primary :#ff8522;
+// $primary: #20c997;
+$primary: #6610f2;
+$dark : #222222;
+$black : #171717;
+// $secondary : #FFF500;
+$success : #09e1c0;
+$danger : #FF3C38;
+$warning : #FFE440;
+$white : #ffffff;
+
+// $card-bg : $white;
+// $card-border-width : 0;
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+// LIGHT MODE OVERRIDES
+
+$body-bg : $light;
+$body-secondary-bg : $white;
+
+// DARK mode Overrides
+$body-bg-dark: #222222;
+$body-secondary-bg-dark: #171717;
+$primary-text-dark:  $indigo-300;
+$link-color-dark:  $indigo-200;
+$link-hover-color-dark:  $indigo-300;
+
+
+
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
