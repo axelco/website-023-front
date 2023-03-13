@@ -6,8 +6,8 @@
         <span class="text">Contact</span>
       </RouterLink>
     </li>
-    <li v-if="resumePdf !== null">
-      <a :href="resumePdf" target="_blank" class="nav-link primary">
+    <li v-if="state.resumePdf !== ''">
+      <a :href="state.resumePdf" target="_blank" class="nav-link primary">
         <i class="icon bi bi-file-earmark-arrow-down"></i>
         <span class="text">CV PDF</span>
       </a>
@@ -22,16 +22,36 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 
+import resumeService from "@/services/resume.service";
+
 const store = useStore();
+const state = reactive({
+  resumePdfLoaded: false,
+  resumePdf: "",
+});
+
+onMounted(() => {
+  fetchResumePdf();
+});
+
+const fetchResumePdf = () => {
+  state.resumePdfLoaded = false;
+  resumeService
+    .getResumePdfByContext()
+    .then((res) => {
+      state.resumePdfLoaded = true;
+      state.resumePdf = res.data.url;
+    })
+    .catch((error) => {
+      state.resumePdfLoaded = true;
+      console.error(error);
+    });
+};
 
 const linkedinUrl = computed(() => {
   return store.getters["infos/getLinkedinUrl"];
-});
-
-const resumePdf = computed(() => {
-  return store.getters["resume/getResumePDF"];
 });
 </script>

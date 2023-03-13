@@ -19,7 +19,7 @@
             <div class="left col-12 col-lg-4 mb-2 mb-lg-0">
               <div class="h-100">
                 <img
-                  style="max-width: 100px; max-height: 100%; filter: grayscale(1)"
+                  style="max-width: 100px; max-height: 100%"
                   class="mb-2 mb-lg-3"
                   src="./../../assets/img/photo-alexandre-rozec-purple-300x300.png"
                 />
